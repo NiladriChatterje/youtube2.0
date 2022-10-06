@@ -9,7 +9,7 @@ import {MdSportsVolleyball} from 'react-icons/md'
 import {BsBookHalf} from 'react-icons/bs'
 import {BiTrendingUp} from 'react-icons/bi'
 import {FaSatelliteDish} from 'react-icons/fa'
-import './SideBar.css'
+import './Sidebar.css'
 import { Link } from 'react-router-dom';
 
 const sideBarData =[
