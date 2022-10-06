@@ -16,9 +16,9 @@ const Home = () => {
         flexWrap={'wrap'}>
             {data?.map((item,i)=>{
                 return (
-                    <React.Suspense fallback={<Box padding='6' boxShadow='lg' bg='blackAlpha.400'>
+                    <React.Suspense fallback={<Box padding='6' m={5} boxShadow='lg' bg='blackAlpha.400'>
                                                 <SkeletonCircle size='10' />
-                                                <SkeletonText m='5' noOfLines={4} spacing='4' />
+                                                <SkeletonText m='20' noOfLines={4} spacing='4' />
                                             </Box>}>
 
                         <Card item={item} key={i} />
