@@ -1,10 +1,27 @@
 import React from 'react'
-import { SideBar } from '../../../App';
+import { SideBar,options } from '../../../App';
 let Card = React.lazy(()=>import('../Card/Card'));
 import { Box, Flex, SkeletonCircle,SkeletonText } from '@chakra-ui/react';
+import { useParams } from 'react-router-dom';
+
+const URL = 'https://youtube-v3-alternative.p.rapidapi.com/search?query=';
 
 const Home = () => {
-    const {data} = React.useContext(SideBar);
+    const {data,setData} = React.useContext(SideBar);
+    const {category} = useParams();
+
+    React.useMemo(()=>{
+       async function fetchData(category){
+      const response = await fetch(URL+category,options);
+        const {data} = await response.json();
+        setData(data);
+        console.log(data)}
+
+      fetchData(category);
+
+    },[category])
+
+
   return (
     <Flex
         id={'home'}

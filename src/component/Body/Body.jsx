@@ -11,6 +11,7 @@ export default () => {
     >
         <Routes>
           <Route path='/' element={<Home />} />
+          <Route path='/:category' element={<Home />} />
         </Routes>
     </Box>
   )

@@ -5,8 +5,8 @@ import Body from './component/Body/Body';
 import Header from './component/Header/Header';
 import Sidebar from './component/SideBar/Sidebar';
 
-const URL = 'https://youtube-v3-alternative.p.rapidapi.com/related?id=';
-const options = {
+export const URL = 'https://youtube-v3-alternative.p.rapidapi.com/related?id=';
+export const options = {
 	method: 'GET',
 	headers: {
 		'X-RapidAPI-Key': '3224681278mshdf603cd43fde3cbp13a2f6jsnf3ec618192c1',
@@ -40,7 +40,7 @@ function App() {
           w={'100vw'}
           color={'whiteAlpha.900'}
           >
-      <SideBar.Provider value={{isToggle,data,setIsToggle,setSuggestedVideo}}>
+      <SideBar.Provider value={{isToggle,data,setData,setIsToggle,setSuggestedVideo}}>
       <Header />
       <Flex>
       <Sidebar />
