@@ -19,7 +19,8 @@ export const SideBar = createContext()
 function App() {
   const [isToggle,setIsToggle] = React.useState(()=>true)
   const [suggestedVideo,setSuggestedVideo] = React.useState(()=>(localStorage.getItem('suggested')||'dQw4w9WgXcQ'))
-  const [data,setData] = React.useState(()=>[])
+  const [data,setData] = React.useState(()=>[]);
+  const [historyList,setHistoryList] = React.useState(()=>[]);
 
   async function fetchData(suggestedVideo){
     const response = await fetch(URL+suggestedVideo,options);
@@ -40,7 +41,7 @@ function App() {
           w={'100vw'}
           color={'whiteAlpha.900'}
           >
-      <SideBar.Provider value={{isToggle,data,setData,setIsToggle,setSuggestedVideo}}>
+      <SideBar.Provider value={{isToggle,data,historyList,setHistoryList,setData,setIsToggle,setSuggestedVideo}}>
       <Header />
       <Flex>
       <Sidebar />

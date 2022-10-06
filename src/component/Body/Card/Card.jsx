@@ -4,17 +4,19 @@ import './Card.css'
 import { Link } from 'react-router-dom'
 import {MdImageNotSupported} from 'react-icons/md'
 import { AiFillEye } from 'react-icons/ai';
+import { SideBar } from '../../../App';
 
-function addHistory(videoId){
-    localStorage.setItem('history',localStorage.getItem('history')?
-    [...localStorage.getItem('history'),videoId]:
-    [videoId]);
+function addHistory(historyList){
+    localStorage.setItem('history',historyList);
 }
 
 const Card = ({item}) => {
+    const {historyList,setHistoryList} = React.useContext(SideBar);
+
   return (
     <Link to={`/player/${item.videoId}`}
-            onClick={()=>addHistory(item.videoId)}>
+            onClick={()=>{setHistoryList([...historyList,item.videoId]);
+                            addHistory(historyList)}}>
         <Box
             id='card'
             m={5}
