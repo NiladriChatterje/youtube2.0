@@ -3,18 +3,21 @@ import { SideBar,options } from '../../../App';
 let Card = React.lazy(()=>import('../Card/Card'));
 import { Box, Flex, SkeletonCircle,SkeletonText } from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
+import SkeletonLoader from '../SkeletonLoader';
 
 const URL = 'https://youtube-v3-alternative.p.rapidapi.com/search?query=';
 
 const Home = () => {
-    const {data,setData} = React.useContext(SideBar);
+    const {data,setData,isLoading,setIsLoading} = React.useContext(SideBar);
     const {category} = useParams();
 
     React.useMemo(()=>{
+      setIsLoading(true);
        async function fetchData(category){
       const response = await fetch(URL+category,options);
         const {data} = await response.json();
         setData(data);
+        setIsLoading(false)
         console.log(data)}
 
       fetchData(category);
@@ -22,8 +25,9 @@ const Home = () => {
     },[category])
 
 
-  return (
-    <Flex
+  return (<>
+    {isLoading?<SkeletonLoader />:
+      <Flex
         id={'home'}
         w={'full'}
         h={'90vh'}
@@ -42,8 +46,8 @@ const Home = () => {
                     </React.Suspense>
                 )
             })}
-    </Flex>
-    )
+    </Flex>}
+    </>)
 }
 
 export default Home
