@@ -10,6 +10,7 @@ const Home = () => {
         id={'home'}
         w={'full'}
         h={'90vh'}
+        justifyContent={'center'}
         overflowX={'hidden'}
         overflowY={'auto'}
         flexWrap={'wrap'}>
