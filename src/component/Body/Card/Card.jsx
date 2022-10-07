@@ -10,13 +10,19 @@ function addHistory(historyList){
     localStorage.setItem('history',historyList);
 }
 
+function addSuggestedVideo(suggestedVideo){
+    localStorage.setItem('suggested',suggestedVideo);
+}
+
 const Card = ({item}) => {
-    const {historyList,setHistoryList} = React.useContext(SideBar);
+    const {historyList,setHistoryList,setSuggestedVideo,suggestedVideo} = React.useContext(SideBar);
 
   return (
     <Link to={`/player/${item.videoId}`}
-            onClick={()=>{setHistoryList([...historyList,item.videoId]);
-                            addHistory(historyList)}}>
+            onClick={()=>{setHistoryList([...historyList,JSON.stringify(item)]);
+                            addHistory(historyList);
+                            setSuggestedVideo(item.videoId)
+                            addSuggestedVideo(suggestedVideo)}}>
         <Box
             id='card'
             m={5}

@@ -26,7 +26,7 @@ const sideBarData =[
 ]
 
 const Sidebar = () => {
-  const {isToggle} = useContext(SideBar);
+  const {isToggle,setQuery} = useContext(SideBar);
   
   return (<>
      {isToggle && <Flex
@@ -35,7 +35,8 @@ const Sidebar = () => {
         h={'full'}
     >
       {sideBarData?.map((item,i)=>{
-                return <Link to={`/${item.name==='Home'?'':item.name}`} key={i}>
+                return <Link to={`/${item.name==='Home'?'':item.name}`} key={i}
+                onClick={()=>setQuery('')}>
                 <Flex
                 id='sidebar-item'
                 mb={3}

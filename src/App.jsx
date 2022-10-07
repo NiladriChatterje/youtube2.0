@@ -5,7 +5,7 @@ import Body from './component/Body/Body';
 import Header from './component/Header/Header';
 import Sidebar from './component/SideBar/Sidebar';
 
-export const URL = 'https://youtube-v3-alternative.p.rapidapi.com/related?id=';
+export const URL2 = 'https://youtube-v3-alternative.p.rapidapi.com/related?id=';
 export const options = {
 	method: 'GET',
 	headers: {
@@ -17,23 +17,12 @@ export const options = {
 export const SideBar = createContext()
 
 function App() {
+  const [query,setQuery]=React.useState(()=>'');
   const [isToggle,setIsToggle] = React.useState(()=>true)
   const [suggestedVideo,setSuggestedVideo] = React.useState(()=>(localStorage.getItem('suggested')||'dQw4w9WgXcQ'))
   const [data,setData] = React.useState(()=>[]);
-  const [historyList,setHistoryList] = React.useState(()=>[]);
+  const [historyList,setHistoryList] = React.useState(()=>(localStorage.getItem('history')?.split(",")||[]));
   const [isLoading,setIsLoading] = React.useState(()=>true)
-
-  async function fetchData(suggestedVideo){
-    const response = await fetch(URL+suggestedVideo,options);
-    const {data} = await response.json();
-    setData(data);
-    setIsLoading(false);
-  console.log(data)
-  }
-  React.useEffect(()=>{
-    fetchData(suggestedVideo);
-  },[suggestedVideo]);
-
 
   return (
     
@@ -43,7 +32,8 @@ function App() {
           w={'100vw'}
           color={'whiteAlpha.900'}
           >
-      <SideBar.Provider value={{isToggle,data,
+      <SideBar.Provider value={{isToggle,data,suggestedVideo,
+      query,setQuery,
         historyList,isLoading,setIsLoading,setHistoryList,
         setData,setIsToggle,setSuggestedVideo}}>
       <Header />

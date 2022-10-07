@@ -8,55 +8,14 @@ const SkeletonLoader = () => {
     justifyContent={'center'}
     overflow={'hidden'}
         flexWrap={'wrap'}>
-      <Box padding='6' m={8} boxShadow='lg' bg='blackAlpha.400'>
+      {new Array(8).map((item,i) =><Box padding='6' 
+                                    m={8} boxShadow='lg' 
+                                    bg='blackAlpha.900'
+                                    key={i}>
           <SkeletonCircle size='10' />
           <SkeletonText m='10' noOfLines={4} spacing='4' />
-      </Box>
-      <Box padding='6' m={8} boxShadow='lg' bg='blackAlpha.400'>
-          <SkeletonCircle size='10' />
-          <SkeletonText m='10' noOfLines={4} spacing='4' />
-      </Box>
-      <Box padding='6' m={8} boxShadow='lg' bg='blackAlpha.400'>
-          <SkeletonCircle size='10' />
-          <SkeletonText m='10' noOfLines={4} spacing='4' />
-      </Box>
-      <Box padding='6' m={8} boxShadow='lg' bg='blackAlpha.400'>
-          <SkeletonCircle size='10' />
-          <SkeletonText m='40' noOfLines={4} spacing='4' />
-      </Box>
-      <Box padding='6' m={8} boxShadow='lg' bg='blackAlpha.400'>
-          <SkeletonCircle size='10' />
-          <SkeletonText m='10' noOfLines={4} spacing='4' />
-      </Box>
-      <Box padding='6' m={8} boxShadow='lg' bg='blackAlpha.400'>
-          <SkeletonCircle size='10' />
-          <SkeletonText m='10' noOfLines={4} spacing='4' />
-      </Box>
-      <Box padding='6' m={8} boxShadow='lg' bg='blackAlpha.400'>
-          <SkeletonCircle size='10' />
-          <SkeletonText m='10' noOfLines={4} spacing='4' />
-      </Box>
-      <Box padding='6' m={8} boxShadow='lg' bg='blackAlpha.400'>
-          <SkeletonCircle size='10' />
-          <SkeletonText m='10' noOfLines={4} spacing='4' />
-      </Box>
-      <Box padding='6' m={8} boxShadow='lg' bg='blackAlpha.400'>
-          <SkeletonCircle size='10' />
-          <SkeletonText m='10' noOfLines={4} spacing='4' />
-      </Box>
-      <Box padding='6' m={8} boxShadow='lg' bg='blackAlpha.400'>
-          <SkeletonCircle size='10' />
-          <SkeletonText m='10' noOfLines={4} spacing='4' />
-      </Box>
-      <Box padding='6' m={8} boxShadow='lg' bg='blackAlpha.400'>
-          <SkeletonCircle size='10' />
-          <SkeletonText m='10' noOfLines={4} spacing='4' />
-      </Box>
-      <Box padding='6' m={5} boxShadow='lg' bg='blackAlpha.400'>
-          <SkeletonCircle size='10' />
-          <SkeletonText m='10' noOfLines={4} spacing='4' />
-      </Box>
-              </Flex>
+      </Box>)}
+    </Flex>
   )
 }
 

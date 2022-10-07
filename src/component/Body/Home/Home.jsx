@@ -1,28 +1,52 @@
 import React from 'react'
-import { SideBar,options } from '../../../App';
+import { SideBar,options,URL2 } from '../../../App';
 let Card = React.lazy(()=>import('../Card/Card'));
 import { Box, Flex, SkeletonCircle,SkeletonText } from '@chakra-ui/react';
-import { useParams } from 'react-router-dom';
 import SkeletonLoader from '../SkeletonLoader';
+import { useParams } from 'react-router-dom';
 
-const URL = 'https://youtube-v3-alternative.p.rapidapi.com/search?query=';
+const URL1 = 'https://youtube-v3-alternative.p.rapidapi.com/search?query=';
+
 
 const Home = () => {
-    const {data,setData,isLoading,setIsLoading} = React.useContext(SideBar);
+    const {data,isLoading,setIsLoading,setData,suggestedVideo,query} = React.useContext(SideBar);
     const {category} = useParams();
 
-    React.useMemo(()=>{
+
+    async function fetchData(category){
       setIsLoading(true);
-       async function fetchData(category){
-      const response = await fetch(URL+category,options);
+      try{
+      const response = await fetch(URL1+category,options);
+      const {data} = await response.json();
+      setData(data);
+      setIsLoading(false)
+      console.log(data)}catch(err){}}
+    
+     
+    React.useEffect(()=>{
+      if(query == ''){
+      async function fetchDataHome(suggestedVideo){
+        try{
+        setIsLoading(true);
+        const response = await fetch(URL2+suggestedVideo,options);
         const {data} = await response.json();
         setData(data);
-        setIsLoading(false)
-        console.log(data)}
+        setIsLoading(false);
+      console.log(data)}catch(err){}
+      }
+     
+          if(category != undefined || category != '')
+           { fetchData(category);}
 
-      fetchData(category);
+          else{ fetchDataHome(suggestedVideo);}
+  
+          console.log(category);
+        }
+        else{
+          fetchData(query)
+        }
+  },[category,query])  
 
-    },[category])
 
 
   return (<>
@@ -30,14 +54,14 @@ const Home = () => {
       <Flex
         id={'home'}
         w={'full'}
-        h={'90vh'}
+        h={'full'}
         justifyContent={'center'}
         overflowX={'hidden'}
         overflowY={'auto'}
         flexWrap={'wrap'}>
             {data?.map((item,i)=>{
                 return (
-                    <React.Suspense fallback={<Box padding='6' m={5} boxShadow='lg' bg='blackAlpha.400'>
+                    <React.Suspense key={i} fallback={<Box padding='6' m={5} boxShadow='lg' bg='blackAlpha.400'>
                                                 <SkeletonCircle size='10' />
                                                 <SkeletonText m='20' noOfLines={4} spacing='4' />
                                             </Box>}>

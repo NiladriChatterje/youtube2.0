@@ -6,8 +6,27 @@ import { SideBar } from '../../App'
 
 
 export default function Header(){
+  const {setQuery} = React.useContext(SideBar)
  
   const {setIsToggle} = React.useContext(SideBar);
+  
+  const queryChange=(e)=>{
+    setQuery(e.target.value);
+  }
+
+  const debouncer = React.useCallback((func)=>{
+      let debounceTimer
+      return function() {
+          const context = this
+          const args = arguments
+              clearTimeout(debounceTimer)
+                  debounceTimer
+              = setTimeout(() => func.apply(context, args), 3000)
+      }
+  
+  })
+
+  const optimizedChange = React.useCallback(debouncer(queryChange),[])
 
   return (<>
     <Flex w={'100vw'}
@@ -27,7 +46,8 @@ export default function Header(){
             <Heading size={'lg'}>2.0</Heading>
             <Input id='searchBar'
                   variant={'filled'}
-                  bg={'whiteAlpha.300'} 
+                  bg={'whiteAlpha.300'}
+                  onChange={optimizedChange} 
                   border='none'
                   pos={'absolute'}
                   right={10}
