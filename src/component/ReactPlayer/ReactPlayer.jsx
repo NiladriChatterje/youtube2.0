@@ -48,19 +48,21 @@ const Reactplayer = () => {
 
   return (
     <Flex
-        
+        flexDir={window.innerWidth<1200?'column':'row'}
+        justifyContent={window.innerWidth<1200?'center':'left'}
         w='full'
         h='90vh'>
           <Box id='player'
               rowGap={'5%'}
-              w={'75%'}
-              h={'90vh'}
+              w={window.innerWidth<1200?'100%':'75%'}
+              h={window.innerWidth<1200?'100%':'90vh'}
               overflowX={'clip'}
               overflowY={'auto'}>
-          <ReactPlayer 
+          <ReactPlayer
+            style={window.innerWidth<1200?{position:'fixed',zIndex:1}:{position:'static'}}
             controls={true}
             url ={`https://www.youtube.com/watch?v=${id}`}
-            height={'80%'}
+            height={window.innerWidth<1200?'40%':'80%'}
             width={'100%'} />
             <Flex 
               justifyContent={'space-between'}>
@@ -126,7 +128,11 @@ const Reactplayer = () => {
           </Box>
            <Flex id={'suggested'} 
            flexWrap={'wrap'}
-            overflowY={'auto'} w={'25%'} pt={5}>
+           justifyContent={window.innerWidth<1200?'center':'left'}
+           pos={window.innerWidth<1200?'relative':'static'}
+           bottom={window.innerWidth<1200?'0':undefined}
+           h={window.innerWidth<1200?'50%':'100%'}
+            overflowY={'auto'} w={window.innerWidth<1200?'100%':'25%'} pt={5}>
            {suggestions?.map((item,i)=>{
                 return (
                         <Card item={item} key={i} />
@@ -137,4 +143,4 @@ const Reactplayer = () => {
   )
 }
 
-export default Reactplayer
+export default Reactplayer;
