@@ -6,8 +6,9 @@ import {MdImageNotSupported} from 'react-icons/md'
 import { AiFillEye } from 'react-icons/ai';
 import { SideBar } from '../../../App';
 
+
 function addHistory(historyList){
-    localStorage.setItem('history',historyList);
+        localStorage.setItem('history',JSON.stringify(historyList));
 }
 
 function addSuggestedVideo(suggestedVideo){
@@ -16,34 +17,45 @@ function addSuggestedVideo(suggestedVideo){
 
 const Card = ({item}) => {
     const {historyList,setHistoryList,setSuggestedVideo,suggestedVideo} = React.useContext(SideBar);
+    
 
   return (
     <Link to={`/player/${item.videoId}`}
-            onClick={()=>{setHistoryList([...historyList,JSON.stringify(item)]);
-                            addHistory(historyList);
-                            setSuggestedVideo(item.videoId)
-                            addSuggestedVideo(suggestedVideo)}}>
+            onClick={()=>{
+                setHistoryList([...historyList,{
+                url : item.thumbnail[1]?.url,
+                videoId:item.videoId,
+                channelId:item.channelId,
+                title: item.title,
+                viewCount: item.viewCount,
+                publishedTimeText:item.publishedTimeText,
+                lengthText: item.lengthText,
+            }]);
+            setSuggestedVideo(item.videoId)
+            addHistory(historyList.reverse());
+            addSuggestedVideo(suggestedVideo)}}>
         <Box
             id='card'
             m={5}
             mt={0}
             h={255}
-            w={295}>
-                {item.thumbnail[1]?.url?<Image 
-                    src={item.thumbnail[1]?.url}
+           w={295}>
+                {(item?.url || item?.thumbnail[1]?.url)?<Image 
+                    src={item?.url || item?.thumbnail[1]?.url}
                     w={'full'}
                     objectFit={'contain'} />:
                     <MdImageNotSupported 
                         id='iconHover'
                         style={{height:150,width:150}}/>}
-                <Text fontSize={'xs'} fontWeight={900}>{item.title}</Text>
+                <Text fontSize={'xs'} fontWeight={900}>
+                    {item?.title}</Text>
                 <Flex>
                     <AiFillEye />
                     <Text
                         ml={2}
                         fontSize={'xs'}
                         color={'gray.500'}>
-                        {item.viewCount}
+                        {item?.viewCount}
                     </Text>
                 </Flex>
             
@@ -52,11 +64,11 @@ const Card = ({item}) => {
                 justifyContent={'space-between'}>
                 <Text fontSize={'xs'}
                        fontWeight={700} >
-                        {item.publishedTimeText}
+                        {item?.publishedTimeText}
                 </Text>
                 <Text fontSize={'xs'}
-                        fontWeight={700}>
-                        {item.lengthText}
+                      fontWeight={700}>
+                        {item?.lengthText}
                 </Text>
             </Flex>
         </Box>

@@ -3,15 +3,18 @@ import React from 'react'
 import { AiFillLike } from 'react-icons/ai';
 import { GiWarlockEye } from 'react-icons/gi';
 import ReactPlayer from 'react-player';
-import { useParams } from 'react-router-dom';
-import {options} from '../../App'
+import { Link, useParams } from 'react-router-dom';
+import {options, SideBar,URL2} from '../../App'
+import Card from '../Body/Card/Card';
 
 const URL = 'https://youtube-v3-alternative.p.rapidapi.com/video?id='
-const URL2 = 'https://youtube-v3-alternative.p.rapidapi.com/comments?id='
+const URL3 = 'https://youtube-v3-alternative.p.rapidapi.com/comments?id='
 
 const Reactplayer = () => {
     const {id} = useParams();
-    const [localData,setLocalData] = React.useState(()=>{})
+    const {suggestedVideo,setIsLoading} = React.useContext(SideBar)
+    const [localData,setLocalData] = React.useState(()=>{});
+    const [suggestions,setSuggestions] = React.useState(()=>[])
     const [localComments,setLocalComments]=React.useState(()=>[]);
 
     React.useEffect(()=>{
@@ -21,14 +24,25 @@ const Reactplayer = () => {
         setLocalData(data);
         console.log(data)
       }
+      async function fetchDataHome(suggestedVideo){
+        try{
+        setIsLoading(true);
+        const response = await fetch(URL2+suggestedVideo,options);
+        const {data} = await response.json();
+        setSuggestions(data);
+        setIsLoading(false);
+      console.log(data)}catch(err){}
+      }
+     
       async function fetchVideoComments(id){
-        const response = await fetch(URL2+id,options);
+        const response = await fetch(URL3+id,options);
         const {data} = await response.json();
         setLocalComments(data);
         console.log(data)
       }
       fetchVideoDetails(id);
-      fetchVideoComments(id)
+      fetchVideoComments(id);
+      fetchDataHome(id);
     },[id])
 
   return (
@@ -68,7 +82,10 @@ const Reactplayer = () => {
                   {item}</span>
               
           ))}</Flex>
-          <Text cursor={'pointer'} fontSize={'lg'} fontWeight={'900'}>{localData?.channelTitle}</Text>
+          <Link to={`/ChannelDetails/${localData?.channelId}`}>
+          <Text cursor={'pointer'} fontSize={'lg'} fontWeight={'900'}
+           >{localData?.channelTitle}</Text>
+           </Link>
           <Text fontSize={'xs'} fontWeight={'600'}>{localData?.description}</Text>
           
           {localComments?.map(item=>(
@@ -82,7 +99,9 @@ const Reactplayer = () => {
                 style={{width:'40px',height:'40px',borderRadius:'50%'}}
                 />
                 <Box w={'full'}>
-                    <Text fontWeight={900} fontSize={'0.9em'}>{item.authorDisplayName}</Text>
+                    <Text fontWeight={900} fontSize={'0.9em'}
+                   >{item.authorDisplayName}
+                  </Text>
                     <Text fontSize={'0.8em'}>{item.textDisplay}</Text>
                     <Flex w='full' 
                     pr={10}
@@ -102,7 +121,15 @@ const Reactplayer = () => {
             </Box>
           ))}
           </Box>
-           
+           <Flex id={'suggested'} 
+           flexWrap={'wrap'}
+            overflowY={'auto'} w={'25%'} pt={5}>
+           {suggestions?.map((item,i)=>{
+                return (
+                        <Card item={item} key={i} />
+                )
+            })}
+           </Flex>
     </Flex>
   )
 }

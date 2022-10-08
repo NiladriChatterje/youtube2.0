@@ -9,7 +9,7 @@ export const URL2 = 'https://youtube-v3-alternative.p.rapidapi.com/related?id=';
 export const options = {
 	method: 'GET',
 	headers: {
-		'X-RapidAPI-Key': '3224681278mshdf603cd43fde3cbp13a2f6jsnf3ec618192c1',
+		'X-RapidAPI-Key': '23512ed8dcmsh480a23b5a80fb35p1219bajsnebe530750740',
 		'X-RapidAPI-Host': 'youtube-v3-alternative.p.rapidapi.com'
 	}
 };
@@ -21,7 +21,7 @@ function App() {
   const [isToggle,setIsToggle] = React.useState(()=>true)
   const [suggestedVideo,setSuggestedVideo] = React.useState(()=>(localStorage.getItem('suggested')||'dQw4w9WgXcQ'))
   const [data,setData] = React.useState(()=>[]);
-  const [historyList,setHistoryList] = React.useState(()=>(localStorage.getItem('history')?.split(",")||[]));
+  const [historyList,setHistoryList] = React.useState(()=>(JSON.parse(localStorage.getItem('history'))||[]));
   const [isLoading,setIsLoading] = React.useState(()=>true)
 
   return (

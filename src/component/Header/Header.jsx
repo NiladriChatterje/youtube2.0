@@ -1,7 +1,8 @@
 import { Heading, Flex, Input, InputGroup, InputRightElement,Divider  } from '@chakra-ui/react'
-import React from 'react'
+import React, { useRef } from 'react'
 import {AiFillYoutube,AiOutlineMenuUnfold} from 'react-icons/ai'
 import {FaSearchengin} from 'react-icons/fa'
+import { useNavigate } from 'react-router-dom'
 import { SideBar } from '../../App'
 
 
@@ -9,10 +10,11 @@ export default function Header(){
   const {setQuery} = React.useContext(SideBar)
  
   const {setIsToggle} = React.useContext(SideBar);
-  
+  const inputRef = useRef();
   const queryChange=(e)=>{
     setQuery(e.target.value);
   }
+  const navigate = useNavigate();
 
   const debouncer = React.useCallback((func)=>{
       let debounceTimer
@@ -21,7 +23,7 @@ export default function Header(){
           const args = arguments
               clearTimeout(debounceTimer)
                   debounceTimer
-              = setTimeout(() => func.apply(context, args), 3000)
+              = setTimeout(() => func.apply(context, args), 8000)
       }
   
   })
@@ -45,6 +47,7 @@ export default function Header(){
           <InputGroup h={30}>
             <Heading size={'lg'}>2.0</Heading>
             <Input id='searchBar'
+                  ref={inputRef}
                   variant={'filled'}
                   bg={'whiteAlpha.300'}
                   onChange={optimizedChange} 
@@ -54,7 +57,12 @@ export default function Header(){
                   w={'45vw'}
                    />
                   <InputRightElement
-                         children={<FaSearchengin 
+                         children={<FaSearchengin
+                         onClick={()=>{
+                          if(inputRef.current.value !== '')
+                            {setQuery(inputRef.current.value);
+                              navigate("/");}
+                         }}
                           cursor={'pointer'}
                           style={{right:0}}
                            />}
