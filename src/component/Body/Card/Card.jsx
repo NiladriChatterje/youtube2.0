@@ -39,7 +39,7 @@ const Card = ({item}) => {
             m={5}
             mt={0}
             h={255}
-           w={295}>
+           w={285}>
                 {(item?.url || item?.thumbnail[1]?.url)?<Image 
                     src={item?.url || item?.thumbnail[1]?.url}
                     w={'full'}
