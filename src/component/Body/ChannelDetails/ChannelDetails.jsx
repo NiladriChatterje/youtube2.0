@@ -40,7 +40,7 @@ const ChannelDetails = () => {
         <Flex w={'full'} gap={4}>
         <Image 
         borderRadius={'50%'}
-        src={meta?.thumbnail?.url || <BsFillFileImageFill color={'red'}/>}
+        src={meta?.thumbnail[0]?.url || <BsFillFileImageFill color={'red'}/>}
          height={150} width={150} />
         <Text fontSize={'xxx-large'} fontWeight={900}>{meta?.title}</Text>
         </Flex>
