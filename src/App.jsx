@@ -9,7 +9,7 @@ export const URL2 = 'https://youtube-v3-alternative.p.rapidapi.com/related?id=';
 export const options = {
 	method: 'GET',
 	headers: {
-		'X-RapidAPI-Key': '23512ed8dcmsh480a23b5a80fb35p1219bajsnebe530750740',
+		'X-RapidAPI-Key': 'e451c225d6msh565153abf287ccdp16ae41jsn98b23c7ee13a',
 		'X-RapidAPI-Host': 'youtube-v3-alternative.p.rapidapi.com'
 	}
 };
