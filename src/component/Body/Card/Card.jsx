@@ -20,11 +20,11 @@ const Card = ({item}) => {
     
 
   return (
-    <Link to={`/player/${item.videoId}`}
+    <Link to={`/Player/${item.videoId}`}
             onClick={()=>{
                 setHistoryList([...historyList,{
+                videoId : item.videoId,
                 url : item.thumbnail[1]?.url,
-                videoId:item.videoId,
                 channelId:item.channelId,
                 title: item.title,
                 viewCount: item.viewCount,

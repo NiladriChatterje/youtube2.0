@@ -11,12 +11,13 @@ const URL = 'https://youtube-v3-alternative.p.rapidapi.com/video?id='
 const URL3 = 'https://youtube-v3-alternative.p.rapidapi.com/comments?id='
 
 const Reactplayer = () => {
-    const {id} = useParams();
+    
     const {suggestedVideo,setIsLoading} = React.useContext(SideBar)
     const [localData,setLocalData] = React.useState(()=>{});
     const [suggestions,setSuggestions] = React.useState(()=>[])
     const [localComments,setLocalComments]=React.useState(()=>[]);
-
+    const {id} = useParams();
+    
     React.useEffect(()=>{
       async function fetchVideoDetails(id){
         const response = await fetch(URL+id,options);
