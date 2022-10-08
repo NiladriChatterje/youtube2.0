@@ -23,13 +23,13 @@ const Card = ({item}) => {
     <Link to={`/player/${item.videoId}`}
             onClick={()=>{
                 setHistoryList([...historyList,{
-                videoId : item.videoId,
-                url : item.thumbnail[1]?.url,
-                channelId:item.channelId,
-                title: item.title,
-                viewCount: item.viewCount,
-                publishedTimeText:item.publishedTimeText,
-                lengthText: item.lengthText,
+                videoId : item.videoId?item.videoId:'',
+                url : item.thumbnail[0]?.url?item.thumbnail[0]?.url:'',
+                channelId:item.channelId?item.channelId:'',
+                title: item.title?item.title:'',
+                viewCount: item.viewCount?item.viewCount:0,
+                publishedTimeText:item.publishedTimeText?item.publishedTimeText:'',
+                lengthText: item.lengthText?item.lengthText:'',
             }]);
             setSuggestedVideo(item.videoId)
             addHistory(historyList.reverse());
@@ -40,9 +40,9 @@ const Card = ({item}) => {
             mt={0}
             h={255}
            w={285}>
-                {(item?.url || item?.thumbnail[1]?.url)?
+                {(item?.url || item?.thumbnail[0]?.url)?
                 <Image 
-                    src={item?.url || item?.thumbnail[1]?.url}
+                    src={item?.url || item?.thumbnail[0]?.url}
                     w={'full'}
                     maxH={190}
                     objectFit={'contain'} />:

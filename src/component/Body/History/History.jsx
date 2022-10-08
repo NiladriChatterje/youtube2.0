@@ -15,11 +15,10 @@ const History = () => {
       w='full' 
       h ='max-content'>
         {historyList.length?historyList.map((item,i)=>{
-         if(!(item instanceof Array))
-          {return <React.Suspense key={i}
+          return <React.Suspense key={i}
             fallback={<SkeletonLoader />}>
             <Card key={i} item={item} />
-          </React.Suspense>}})
+          </React.Suspense>})
           :''}
     </Flex>
   );

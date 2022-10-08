@@ -48,6 +48,7 @@ const Reactplayer = () => {
 
   return (
     <Flex
+        flexDir={window.innerWidth>1200?'row':'column'}
         w='full'
         h='90vh'>
           <Box id='player'
