@@ -19,7 +19,8 @@ export default () => {
           <Route path={'/'} element={<Home />} />
           <Route path={'/History'} element={<History />} />
           <Route path={'/:category'} element={<Home />} />
-          <Route path={'/player/:id'} element={<Reactplayer />} />
+          <Route path={'/History/player/:id'} element={<Reactplayer />} />
+          <Route path={'*'} element={<Reactplayer />} />
           <Route path={'/ChannelDetails/:channelId'} element={<ChannelDetails />} />     
         </Routes>
     </Flex>
