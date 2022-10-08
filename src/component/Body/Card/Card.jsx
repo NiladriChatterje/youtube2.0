@@ -20,7 +20,7 @@ const Card = ({item}) => {
     
 
   return (
-    <Link to={`/Player/${item.videoId}`}
+    <Link to={`/player/${item.videoId}`}
             onClick={()=>{
                 setHistoryList([...historyList,{
                 videoId : item.videoId,
