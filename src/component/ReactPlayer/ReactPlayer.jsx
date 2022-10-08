@@ -51,7 +51,7 @@ const Reactplayer = () => {
         h='90vh'>
           <Box id='player'
               rowGap={'5%'}
-              w={'70vw'}
+              w={'75%'}
               h={'90vh'}
               overflowX={'clip'}
               overflowY={'auto'}>
@@ -73,9 +73,9 @@ const Reactplayer = () => {
             <Text fontSize={'xs'}>Uploaded: {localData?.publishDate}</Text>
           <Text  fontSize={'lg'}>{localData?.title}</Text>
           <Flex flexWrap={'wrap'}>
-            {localData?.keywords?.map(item=>(
+            {localData?.keywords?.map((item,i)=>(
                 
-                <span  
+                <span key={i} 
                 style={{borderRadius:10,width:'max-content',
                 margin:'5px',padding:'5px',fontSize:'0.8em',
                 background:'rgb(250,50,55)'}} >
@@ -88,8 +88,9 @@ const Reactplayer = () => {
            </Link>
           <Text fontSize={'xs'} fontWeight={'600'}>{localData?.description}</Text>
           
-          {localComments?.map(item=>(
+          {localComments?.map((item,i)=>(
             <Box
+              key={i}
               mt={10}
               w={'full'}
             >
