@@ -21,7 +21,7 @@ export default () => {
           <Route path={'/History'} element={<History />} />
           <Route path={'/:category'} element={<Home />} />
           <Route path={'/player/:id'} element={<Reactplayer />} />
-          <Route path={'*'} element={<AiOutlineCloudSync />} />
+          <Route path={'/*'} element={<AiOutlineCloudSync />} />
           <Route path={'/ChannelDetails/:channelId'} element={<ChannelDetails />} />     
         </Routes>
     </Flex>
