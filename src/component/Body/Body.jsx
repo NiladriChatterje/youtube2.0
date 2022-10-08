@@ -16,8 +16,8 @@ export default () => {
         flexWrap={'wrap'}
     >
         <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/History' element={<History />} />
+          <Route path='/' element={<Home />} />
+          <Route path='/History' element={<History />} />
           <Route path='/:category' element={<Home />} />
           <Route path='/Player/:id' element={<Reactplayer />} />
           <Route path='/ChannelDetails/:channelId' element={<ChannelDetails />} />
