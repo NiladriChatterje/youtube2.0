@@ -36,8 +36,14 @@ const ChannelDetails = () => {
 
 
   return (<>
-    <Box pr={5} pl={5} w={'full'} >
+    <Box pr={5} pl={5} w={'full'} pos={'relative'} >
         <Flex w={'full'} gap={4}>
+        <Box 
+        pos={'absolute'}
+        zIndex={-1}
+        >
+            <Image src={meta?.image?.banner[1]?.url} w={'100vw'} />
+        </Box>
         <Image 
         borderRadius={'50%'}
         src={meta?.thumbnail[0]?.url || <BsFillFileImageFill color={'red'}/>}
