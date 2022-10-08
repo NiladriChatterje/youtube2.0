@@ -40,9 +40,11 @@ const Card = ({item}) => {
             mt={0}
             h={255}
            w={285}>
-                {(item?.url || item?.thumbnail[1]?.url)?<Image 
+                {(item?.url || item?.thumbnail[1]?.url)?
+                <Image 
                     src={item?.url || item?.thumbnail[1]?.url}
                     w={'full'}
+                    maxH={190}
                     objectFit={'contain'} />:
                     <MdImageNotSupported 
                         id='iconHover'
